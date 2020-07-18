@@ -16,6 +16,14 @@ export interface ICustomer {
     orderTotal?: number;
 }
 
+export interface IPost {
+  _id?: string;
+  image: string;
+  description: string;
+  date: string;
+
+}
+
 export interface IState {
     abbreviation: string;
     name: string;
@@ -42,4 +50,10 @@ export interface ICustomerResponse {
     customer: ICustomer;
     status: boolean;
     error: string;
+}
+
+export interface IPostResponse {
+  post: IPost;
+  status: boolean;
+  error: string;
 }

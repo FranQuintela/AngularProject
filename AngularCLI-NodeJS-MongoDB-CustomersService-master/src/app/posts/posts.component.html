@@ -1,0 +1,19 @@
+
+<!-- <app-posts-modal></app-posts-modal> -->
+
+
+<section id="info-section">
+  <article *ngFor="let post of posts; even as isEven; trackBy: trackby.post" [ngStyle]="styleImages(isEven)">
+    <figure
+      [ngStyle]="{ 'background-image': 'url(' + imageUrl + post.image + '.jpg)' }"
+    ></figure>
+
+    <div>
+      <h2>{{ post.description | trim }}</h2>
+      <p>
+        {{ post.date }}
+      </p>
+    </div>
+  </article>
+
+</section>
