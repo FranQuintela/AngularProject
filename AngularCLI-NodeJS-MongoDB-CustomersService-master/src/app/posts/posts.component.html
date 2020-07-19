@@ -1,8 +1,25 @@
 
 <!-- <app-posts-modal></app-posts-modal> -->
 
+<ol>
+  <li>
+    <mat-form-field>
+      <mat-label>Where do you stay?</mat-label>
+      <input matInput [(ngModel)]="name">
+    </mat-form-field>
+  </li>
+  <li>
+    <button mat-raised-button (click)="openDialog()">Pick city or food</button>
+  </li>
+  <li *ngIf="city">
+    You chose: <i>{{city}}</i>
+  </li>
+  <li *ngIf="food_from_modal">
+    I love {{food_from_modal}}
+  </li>
+</ol>
 
-<section id="info-section">
+<!-- <section id="info-section">
   <article *ngFor="let post of posts; even as isEven; trackBy: trackby.post" [ngStyle]="styleImages(isEven)">
     <figure
       [ngStyle]="{ 'background-image': 'url(' + imageUrl + post.image + '.jpg)' }"
@@ -16,4 +33,4 @@
     </div>
   </article>
 
-</section>
+</section> -->

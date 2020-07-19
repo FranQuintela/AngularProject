@@ -7,6 +7,9 @@ import { IPost, IOrder, IPagedResults } from '../shared/interfaces';
 import { Sorter } from '../core/sorter';
 import { TrackByService } from '../core/trackby.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { MyModalComponent } from '../modals/my-modal/my-modal.component';
+
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -20,13 +23,20 @@ export class PostsComponent implements OnInit {
   posts: IPost[] = [];
   filteredPosts: IPost[] = [];
 
+
+  city: string;
+  name: string;
+  food_from_modal: string;
+
+
   totalRecords: number = 0;
   pageSize: number = 10;
 
   constructor(private router: Router,
               private dataService: DataService,
               private dataFilter: DataFilterService,
-              private sorter: Sorter, public trackby: TrackByService) { }
+              private sorter: Sorter, public trackby: TrackByService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.title = 'Posts';
@@ -68,4 +78,18 @@ export class PostsComponent implements OnInit {
     };
     }
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MyModalComponent, {
+      width: '250px',
+      data: { name: this.name, animal: this.city }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      this.city = result;
+      this.food_from_modal = result.food;
+    });
+  }
+
 }
