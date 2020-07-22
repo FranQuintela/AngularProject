@@ -10,6 +10,7 @@ const PostSchema = new Schema({
   image       : { type : String, required: false, trim: true },
   description       : { type : String, required: false, trim: true },
   date       : { type : String, required: false, trim: true },
+  style : { type : String, required: false, trim: true },
 
 });
 
