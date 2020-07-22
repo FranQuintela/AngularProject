@@ -1,13 +1,6 @@
-<h1 mat-dialog-title>You are from {{data.name}}</h1>
 
-<div mat-dialog-content>
+<div mat-dialog-content class="dialog-picture">
   <div>
-    <img src="../../../assets/images/B-FuA1GBLQg.jpg" alt="image at full size">
+    <img src={{data.image}} alt="image at full size">
   </div>
-</div>
-
-
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Get Food</button>
-    <button mat-button [mat-dialog-close]="data.city" cdkFocusInitial>Get City</button>
 </div>

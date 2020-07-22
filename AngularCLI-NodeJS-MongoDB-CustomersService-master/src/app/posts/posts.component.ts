@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataFilterService } from '../core/data-filter.service';
@@ -23,11 +23,9 @@ export class PostsComponent implements OnInit {
   posts: IPost[] = [];
   filteredPosts: IPost[] = [];
 
+  @Input() postStyle: string;
 
-  city: string;
-  name: string;
-  food_from_modal: string;
-
+  // image: string = "../../../assets/images/B-FuA1GBLQg.jpg";
 
   totalRecords: number = 0;
   pageSize: number = 10;
@@ -79,17 +77,18 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  openDialog(): void {
+  openDialog(image: string): void {
     const dialogRef = this.dialog.open(MyModalComponent, {
-      width: '250px',
-      data: { name: this.name, animal: this.city }
+      data: { image: '../' + image }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
-      this.city = result;
-      this.food_from_modal = result.food;
     });
+  }
+
+  filterPostsOfStyle(style){
+    return this.posts.filter(x => x.style == style);
   }
 
 }

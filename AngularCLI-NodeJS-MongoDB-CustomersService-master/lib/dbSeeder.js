@@ -69,6 +69,20 @@ class DBSeeder {
             "05/04/2020",
         ];
 
+        var styles =
+        [
+            "collage",
+            "collage",
+            "collage",
+            "collage",
+            "collage",
+            "collage",
+            "drawing",
+            "drawing",
+            "drawing",
+            "drawing",
+        ];
+
         Post.remove({});
 
         var l = imgs.length,
@@ -79,7 +93,8 @@ class DBSeeder {
             var post = new Post({
                 'image' : imgs[i],
                 'date': dates[i],
-                'description': descriptions[i]
+                'description': descriptions[i],
+                'style': styles[i]
             });
 
             //console.log('firstOrder: ' + firstOrder + ", lastOrder: " + lastOrder);

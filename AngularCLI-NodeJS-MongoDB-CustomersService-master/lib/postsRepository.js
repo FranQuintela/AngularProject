@@ -57,7 +57,7 @@ class PostsRepository {
             let count = posCount;
             console.log(`Posts count: ${count}`);
 
-            Post.find({}, { '_id': 0, 'image': 1, 'description': 1, 'date': 1,})
+            Post.find({}, { '_id': 0, 'image': 1, 'description': 1, 'date': 2 , 'style': 3})
                     .skip(skip)
                     .limit(top)
                     .exec((err, postsSummary) => {
@@ -79,63 +79,6 @@ class PostsRepository {
                 return callback(err);
             }
             callback(null, post);
-        });
-    }
-
-    // insert a  post
-    insertPost(body, callback) {
-        console.log('*** PostsRepository.insertPost');
-        let post = new Post();
-        console.log(body);
-
-        post.image = body.image;
-        post.description = body.description;
-        post.date = body.date;
-
-        post.save((err, post) => {
-            if (err) {
-                console.log(`*** PostsRepository insertPost error: ${err}`);
-                return callback(err, null);
-            }
-
-            callback(null, post);
-        });
-    }
-
-    updatePost(id, body, callback) {
-        console.log('*** PostsRepository.editPost');
-
-        Post.findById(id, (err, post)  => {
-            if (err) {
-                console.log(`*** PostsRepository.editPost error: ${err}`);
-                return callback(err);
-            }
-
-            post.image = body.image || post.image;
-            post.description = body.description || post.description;
-            post.date = body.date || post.date;
-
-            post.save((err, post) => {
-                if (err) {
-                    console.log(`*** PostsRepository.updatePost error: ${err}`);
-                    return callback(err, null);
-                }
-
-                callback(null, post);
-            });
-
-        });
-    }
-
-    // delete a post
-    deletePost(id, callback) {
-        console.log('*** PostsRepository.deletePost');
-        Post.remove({ '_id': id }, (err, post) => {
-            if (err) {
-                console.log(`*** PostsRepository.deletePost error: ${err}`);
-                return callback(err, null);
-            }
-            callback(null, posts);
         });
     }
 
