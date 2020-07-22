@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataFilterService } from '../core/data-filter.service';
@@ -6,6 +6,9 @@ import { DataService } from '../core/data.service';
 import { IPost, IOrder, IPagedResults } from '../shared/interfaces';
 import { Sorter } from '../core/sorter';
 import { TrackByService } from '../core/trackby.service';
+
+import { MatDialog } from '@angular/material/dialog';
+import { MyModalComponent } from '../modals/my-modal/my-modal.component';
 
 @Component({
   selector: 'app-posts',
@@ -20,13 +23,18 @@ export class PostsComponent implements OnInit {
   posts: IPost[] = [];
   filteredPosts: IPost[] = [];
 
+  @Input() postStyle: string;
+
+  // image: string = "../../../assets/images/B-FuA1GBLQg.jpg";
+
   totalRecords: number = 0;
   pageSize: number = 10;
 
   constructor(private router: Router,
               private dataService: DataService,
               private dataFilter: DataFilterService,
-              private sorter: Sorter, public trackby: TrackByService) { }
+              private sorter: Sorter, public trackby: TrackByService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.title = 'Posts';
@@ -68,4 +76,19 @@ export class PostsComponent implements OnInit {
     };
     }
   }
+
+  openDialog(image: string): void {
+    const dialogRef = this.dialog.open(MyModalComponent, {
+      data: { image: '../' + image }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
+  }
+
+  filterPostsOfStyle(style){
+    return this.posts.filter(x => x.style == style);
+  }
+
 }

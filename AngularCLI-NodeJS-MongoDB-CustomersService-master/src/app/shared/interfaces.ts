@@ -21,7 +21,7 @@ export interface IPost {
   image: string;
   description: string;
   date: string;
-
+  style: string;
 }
 
 export interface IState {
